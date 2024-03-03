@@ -1,0 +1,23 @@
+.header {
+    width: 100%;
+    height: 50px;
+
+    display: flex;
+    align-items: center;
+    // background-image: linear-gradient(90deg, #264D99 0%, #000000 44.18%);
+    background: radial-gradient(66.51% 75.22% at .48% 101.69%, rgba(149, 59, 181, .3) 0%, #ffffff10 100%), linear-gradient(107.33deg, #264d99 0%, #05050a 47.75%);
+
+    &__logo {
+        display: inline-block;
+        color: white;
+
+        span::before {
+            content: 'VW';
+
+            &:hover {
+                transition: 0.3s ease;
+                color: black;
+            }
+        }
+    }
+}
