@@ -1,31 +1,31 @@
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { fetchFilms,genresChanges } from './filmsSlice'
-
+import { genresChanges, mainFilmsChanges } from './filmsSlice'
 
 import './films.scss'
-import { useHttp } from '../../hooks/http.hook'
-import { log } from 'console'
-import { genresAPI } from '../../services'
+
+import { genresAPI, filmsApi } from '../../services'
 const Films = () => {
 
     const { mainFilms, filmsLoadingStatus } = useAppSelector(state => state.films)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchFilms())
-        addGenre()
-        
+        addGenreAndFilms()
+
         // eslint-disable-next-line
     }, [])
 
     // console.log(mainFilms);
 
-    const addGenre = () =>{
+    const addGenreAndFilms = () => {
         genresAPI()
-        .then(value => value.json())
-        .then((value:any) => dispatch(genresChanges(value.genres)))
+            .then(data => dispatch(genresChanges(data.genres)))
+
+        filmsApi.getByPage(1)
+            .then(data => dispatch(mainFilmsChanges(data.results)))
     }
+
     return (
         <div className='films'>
 

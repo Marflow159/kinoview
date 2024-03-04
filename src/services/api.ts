@@ -1,9 +1,20 @@
-import { useAppDispatch } from "../hooks/hooks"
+import axios from "axios"
 
+const api = `https://api.themoviedb.org/3/`
 
-const makeQuery = (url: string) => {
-    return `https://api.themoviedb.org/3/${url}`
-}
+const apiInstance = axios.create({
+    baseURL: api,
+    headers: {
+        'Authorization': `Bearer ${process.env.REACT_APP_API_KEY}`
+    }
+})
+
+const makeQuery = (url: string) => (
+    apiInstance
+        .get(api + url)
+        .then(responce => (responce.data))
+        .catch(e => console.log(e))
+)
 
 const filmsApi = {
     getByPage: (page: number) => (makeQuery(`movie/popular?page=${page}`)),
@@ -13,15 +24,5 @@ const filmsApi = {
     )
 }
 
-const genresAPI = () => {
-        const options = {
-            method: 'GET',
-            headers: {
-                accept: 'application/json',
-                Authorization: `Bearer ${process.env.REACT_APP_API_KEY}`
-            }
-        };
-
-        return fetch('https://api.themoviedb.org/3/genre/movie/list?language=en', options)
-}
+const genresAPI = () => (makeQuery('genre/movie/list'))
 export { filmsApi, genresAPI }
