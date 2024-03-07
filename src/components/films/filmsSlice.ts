@@ -5,14 +5,12 @@ const filmsAdapter = createEntityAdapter()
 
 interface States {
     mainFilms: Array<any>,
-    genres: Array<any>,
-    filmsLoadingStatus: string,
+    genres: Array<any>
 }
 
 const initialState: States = filmsAdapter.getInitialState({
     mainFilms: [],
-    genres: [],
-    filmsLoadingStatus: 'idle'
+    genres: []
 })
 
 const filmsSlice = createSlice({

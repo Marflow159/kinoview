@@ -4,11 +4,14 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainPage from '../pages/MainPage';
 
 const App: React.FC = () => (
-    <BrowserRouter>
-        <Routes>
-            <Route path='/' element={<MainPage />} />
-        </Routes>
-    </BrowserRouter>
+    <div className='app'>
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<MainPage />} />
+            </Routes>
+        </BrowserRouter>
+    </div>
+
 
 )
 
