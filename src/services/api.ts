@@ -21,7 +21,8 @@ const filmsApi = {
     getById: (id: number) => makeQuery(`movie/${id}`),
     getByGenres: (genreIds: Array<number>, page: number) => (
         makeQuery(`/discover/movie?with_genres=${genreIds.join(',')}&page=${page}`)
-    )
+    ),
+    searchMovie: (query:string,page:number) => (makeQuery(`search/movie?query=${query}&include_adult=false&page=${page}`))
 }
 
 const genresAPI = () => (makeQuery('genre/movie/list'))

@@ -1,12 +1,27 @@
+import { FormEvent } from 'react'
 import './header.scss'
-
+import { useAppDispatch } from '../../hooks/hooks'
+import { mainFilmsChanges } from '../films/filmsSlice'
+import { filmsApi } from '../../services'
 const Header = () => {
+    const dispatch = useAppDispatch()
+
+    const searchMovie = ({ target: { value } }: any) => {
+        if (value.length === 0) {
+            filmsApi.getByPage(1)
+                .then((data: any) => dispatch(mainFilmsChanges(data.results)))
+        } else {
+            filmsApi.searchMovie(value, 1)
+                .then((data: any) => dispatch(mainFilmsChanges(data.results)))
+        }
+    }
+
     return (
         <div className='header'>
             <a href="/" className='header__logo'>
                 <h1>Kino<span>VieW</span></h1>
             </a>
-            <input placeholder='Search your movie...' type="text" />
+            <input onChange={searchMovie} placeholder='Search your movie...' type="text" />
         </div>
     )
 }

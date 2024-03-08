@@ -7,10 +7,10 @@ import './films.scss'
 import FilmsElement from '../filmsElement/FilmsElement'
 
 const Films = () => {
-
-    const { mainFilms } = useAppSelector(state => state.films)
-
+    const { mainFilms, genres } = useAppSelector(state => state.films)
     const dispatch = useAppDispatch()
+
+    let pageNumber
 
     useEffect(() => {
         addGenreAndFilms()
@@ -21,7 +21,7 @@ const Films = () => {
 
     const filmsElement = mainFilms.map(item => {
         const {id, ...props} = item
-        return <FilmsElement key={id} {...props}/>
+        return <FilmsElement key={id} {...props} genres={genres}/>
     })
 
     const addGenreAndFilms = () => {
@@ -31,7 +31,7 @@ const Films = () => {
         filmsApi.getByPage(1)
             .then((data: any) => dispatch(mainFilmsChanges(data.results)))
     }
-
+    
     return (
         <div className='films'>
             {filmsElement}
