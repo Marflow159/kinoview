@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks"
-import { pageChanges,mainFilmsChanges } from '../films/filmsSlice'
+import { pageChanges, mainFilmsChanges } from '../films/filmsSlice'
 import { filmsApi } from '../../services'
 
 import './pageNumber.scss'
@@ -10,14 +10,16 @@ const PageNumber = () => {
     let numberOfPage: any
 
     const onPlus = () => {
+        window.scrollTo(0,0)
         dispatch(pageChanges(page + 1))
         filmsApi.getByPage(page + 1)
             .then((data: any) => dispatch(mainFilmsChanges(data.results)))
     }
     const onMinus = () => {
+        window.scrollTo(0,0)
         dispatch(pageChanges(page - 1))
         filmsApi.getByPage(page - 1)
-        .then((data: any) => dispatch(mainFilmsChanges(data.results)))
+            .then((data: any) => dispatch(mainFilmsChanges(data.results)))
     }
 
     return (

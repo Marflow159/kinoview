@@ -19,9 +19,9 @@ const Films = () => {
 
     // console.log(mainFilms);
 
-    const filmsElement = mainFilms.map(item => {
+    const filmsElement = mainFilms.map((item, i) => {
         const {id, ...props} = item
-        return <FilmsElement key={id} {...props} genres={genres}/>
+        return <FilmsElement key={id} {...props} genres={genres} i={i}/>
     })
 
     const addGenreAndFilms = () => {
