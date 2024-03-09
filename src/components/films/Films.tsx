@@ -1,13 +1,18 @@
 import { useEffect } from 'react'
 import { useAppSelector, useAppDispatch } from '../../hooks/hooks'
-import { genresChanges, mainFilmsChanges } from './filmsSlice'
-import { genresAPI, filmsApi } from '../../services'
+import { fetchFilms, genresChanges } from './filmsSlice'
+import { genresAPI } from '../../services'
+
+import FilmsElement from '../filmsElement/FilmsElement'
+import PageNumber from '../pageNumber/PageNumber'
+import SkeletonCard from '../skeleton/SkeletonCard'
 
 import './films.scss'
-import FilmsElement from '../filmsElement/FilmsElement'
+import NotFound from '../notFound/NotFound'
+
 
 const Films = () => {
-    const { mainFilms, genres } = useAppSelector(state => state.films)
+    const { mainFilms, genres, filmLoadingStatus } = useAppSelector(state => state.films)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -17,21 +22,39 @@ const Films = () => {
 
 
     const filmsElement = mainFilms.map((item, i) => {
-        const {id, ...props} = item
-        return <FilmsElement key={id} {...props} genres={genres} i={i}/>
+        const { id, ...props } = item
+        return <FilmsElement key={id} {...props} genres={genres} i={i} />
     })
 
     const addGenreAndFilms = () => {
         genresAPI()
             .then((data: any) => dispatch(genresChanges(data.genres)))
 
-        filmsApi.getByPage(1)
-            .then((data: any) => dispatch(mainFilmsChanges(data.results)))
+        dispatch(fetchFilms())
     }
-    
+
+    let element
+    if (filmLoadingStatus === 'loading') {
+        element = <SkeletonCard cards={20} />
+    } else if (filmLoadingStatus === 'error') {
+        element = <h4 className="text-center mt-5">Error</h4>
+    } else {
+        if (mainFilms.length > 0) {
+            element = (
+                <>
+                    {filmsElement}
+                    <PageNumber />
+                </>
+
+            )
+        } else if (mainFilms.length === 0) {
+            element = <NotFound/>
+        }
+    }
+
     return (
         <div className='films'>
-            {filmsElement}
+            {element}
         </div>
     )
 
