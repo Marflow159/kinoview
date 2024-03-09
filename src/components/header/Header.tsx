@@ -10,16 +10,15 @@ const Header = () => {
 
     const dispatch = useAppDispatch()
 
-    const searchMovie = ({ target: { value } }: any) => {
+    const searchMovie = (e:any) => {
+        let {value} = e.target
         if (value.length === 0) {
-            dispatch(mainFilmsChanges([]))
             filmsApi.getByPage(1)
                 .then((data: any) => dispatch(mainFilmsChanges(data.results)))
         } else {
-            dispatch(mainFilmsChanges([]))
             filmsApi.searchMovie(value, 1)
                 .then((data: any) => dispatch(mainFilmsChanges(data.results)))
-        }
+        } 
     }
 
     const onChooseGenres = () => {
@@ -35,7 +34,13 @@ const Header = () => {
                 Genres
                 <img src="./image/mainPage/up-arrow.png" className={chooseGenres === true ? 'rotate': ''} alt="up-arrow" />
             </div>
-            <input onChange={searchMovie} placeholder='Search your movie...' type="text" />
+            <input 
+            onKeyDown={(e) => {
+                if(e.key === 'Enter'){
+                    searchMovie(e)
+                }
+            }} 
+            placeholder='Search your movie...' type="text" id='inputSearch'/>
         </div>
     )
 }

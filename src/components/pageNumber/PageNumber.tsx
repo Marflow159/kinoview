@@ -7,8 +7,6 @@ const PageNumber = () => {
     const { page } = useAppSelector(state => state.films)
     const dispatch = useAppDispatch()
 
-    let numberOfPage: any
-
     const onPlus = () => {
         window.scrollTo(0,0)
         dispatch(pageChanges(page + 1))

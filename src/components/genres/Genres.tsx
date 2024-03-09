@@ -17,7 +17,6 @@ const Genres = () => {
 
     const onChooseGenres = (id: number) => {
         dispatch(chooseGenresChanges(false))
-        dispatch(mainFilmsChanges([]))
         filmsApi.getByGenres(id, 1)
             .then((data: any) => dispatch(mainFilmsChanges(data.results)))
     }
