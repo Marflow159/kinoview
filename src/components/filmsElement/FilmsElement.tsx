@@ -24,7 +24,7 @@ const FilmsElement = ({ title, genre_ids, release_date, poster_path, genres, i }
     let firstDelay = 0.22 + (i * 0.03)
     let secondDelay = 0.35 + (i * 0.03)
 
-    setTimeout(()=> setActiveClazz('filmsElement acttive'),100)
+    setTimeout(()=> setActiveClazz('filmsElement done'),100)
 
     return (
         <div className={activeClazz} style={{ transitionDelay: `${firstDelay}s, ${secondDelay}s, 0s` }}>

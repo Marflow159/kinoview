@@ -10,14 +10,11 @@ const Films = () => {
     const { mainFilms, genres } = useAppSelector(state => state.films)
     const dispatch = useAppDispatch()
 
-    let pageNumber
-
     useEffect(() => {
         addGenreAndFilms()
         // eslint-disable-next-line
     }, [])
 
-    // console.log(mainFilms);
 
     const filmsElement = mainFilms.map((item, i) => {
         const {id, ...props} = item

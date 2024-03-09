@@ -8,9 +8,11 @@ const Header = () => {
 
     const searchMovie = ({ target: { value } }: any) => {
         if (value.length === 0) {
+            dispatch(mainFilmsChanges([]))
             filmsApi.getByPage(1)
                 .then((data: any) => dispatch(mainFilmsChanges(data.results)))
         } else {
+            dispatch(mainFilmsChanges([]))
             filmsApi.searchMovie(value, 1)
                 .then((data: any) => dispatch(mainFilmsChanges(data.results)))
         }
