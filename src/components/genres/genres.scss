@@ -1,0 +1,47 @@
+.genres {
+    position: fixed;
+    top: -150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+
+
+    padding: 20px;
+    width: 600px;
+    height: 150px;
+
+    background: white;
+
+    box-shadow: 0 1px 5px black;
+
+    border-radius: 0 0 20px 20px;
+
+    transition: all 0.5s ease;
+    button  {
+        background: none;
+        border: none;
+
+        text-align: start;
+        color: dodgerblue;
+
+        width: 23%;
+        height: 20%;
+        padding: 0 0 0 10px;
+        border-radius: 5px;
+
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgb(239, 239, 239);
+            color: gray;
+        }
+    }
+
+    &.active{
+        top: 50px;
+    }
+}

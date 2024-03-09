@@ -19,8 +19,8 @@ const makeQuery = (url: string) => (
 const filmsApi = {
     getByPage: (page: number) => (makeQuery(`movie/popular?page=${page}`)),
     getById: (id: number) => makeQuery(`movie/${id}`),
-    getByGenres: (genreIds: Array<number>, page: number) => (
-        makeQuery(`/discover/movie?with_genres=${genreIds.join(',')}&page=${page}`)
+    getByGenres: (genreId: number, page: number) => (
+        makeQuery(`/discover/movie?with_genres=${genreId}&page=${page}`)
     ),
     searchMovie: (query:string,page:number) => (makeQuery(`search/movie?query=${query}&include_adult=false&page=${page}`))
 }

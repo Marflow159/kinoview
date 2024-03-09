@@ -1,9 +1,13 @@
-import { FormEvent } from 'react'
-import './header.scss'
-import { useAppDispatch } from '../../hooks/hooks'
-import { mainFilmsChanges } from '../films/filmsSlice'
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
+import { chooseGenresChanges, mainFilmsChanges } from '../films/filmsSlice'
 import { filmsApi } from '../../services'
+
+import './header.scss'
+
+
 const Header = () => {
+    const { chooseGenres } = useAppSelector(state => state.films)
+
     const dispatch = useAppDispatch()
 
     const searchMovie = ({ target: { value } }: any) => {
@@ -18,11 +22,19 @@ const Header = () => {
         }
     }
 
+    const onChooseGenres = () => {
+        dispatch(chooseGenresChanges(!chooseGenres))
+    }
+
     return (
         <div className='header'>
             <a href="/" className='header__logo'>
                 <h1>Kino<span>VieW</span></h1>
             </a>
+            <div className='header__genres' onClick={onChooseGenres}>
+                Genres
+                <img src="./image/mainPage/up-arrow.png" className={chooseGenres === true ? 'rotate': ''} alt="up-arrow" />
+            </div>
             <input onChange={searchMovie} placeholder='Search your movie...' type="text" />
         </div>
     )
