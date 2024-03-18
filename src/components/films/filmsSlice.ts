@@ -6,7 +6,7 @@ const filmsAdapter = createEntityAdapter()
 
 interface States {
     mainFilms: Array<any>,
-    genres: Array<any>,
+    genresName: Array<any>,
     filmInfo: Object,
     page: number,
     chooseGenres: boolean,
@@ -15,7 +15,7 @@ interface States {
 
 const initialState: States = filmsAdapter.getInitialState({
     mainFilms: [],
-    genres: [],
+    genresName: [],
     filmInfo: {},
     page: 1,
     chooseGenres: false,
@@ -35,7 +35,7 @@ const filmsSlice = createSlice({
     initialState,
     reducers: {
         mainFilmsChanges: (state, action) => { state.mainFilms = action.payload },
-        genresChanges: (state, action) => { state.genres = action.payload },
+        genresChanges: (state, action) => { state.genresName = action.payload },
         pageChanges: (state, action) => { state.page = action.payload },
         chooseGenresChanges: (state, action) => { state.chooseGenres = action.payload },
         filmInfoChanges: (state, action) => { state.filmInfo = action.payload }

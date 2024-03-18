@@ -12,7 +12,7 @@ import NotFound from '../notFound/NotFound'
 
 
 const Films = () => {
-    const { mainFilms, genres, filmLoadingStatus } = useAppSelector(state => state.films)
+    const { mainFilms, genresName, filmLoadingStatus } = useAppSelector(state => state.films)
     const dispatch = useAppDispatch()
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const Films = () => {
 
     const filmsElement = mainFilms.map((item, i) => {
         const { id, ...props } = item
-        return <FilmsElement key={id} {...props} genres={genres} i={i} id={id}/>
+        return <FilmsElement key={id} {...props} genres={genresName} i={i} id={id}/>
     })
 
     const addGenreAndFilms = () => {

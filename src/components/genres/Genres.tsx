@@ -6,9 +6,9 @@ import './genres.scss'
 
 const Genres = () => {
     const dispatch = useAppDispatch()
-    const { genres, chooseGenres } = useAppSelector(state => state.films)
+    const { genresName, chooseGenres } = useAppSelector(state => state.films)
 
-    let genresButtons = genres.map(({ id, name }) => {
+    let genresButtons = genresName.map(({ id, name }) => {
         return (
             <Link to={'/'} key={id} onClick={() => onChooseGenres(id)}>
                 {name}
