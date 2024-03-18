@@ -11,7 +11,7 @@ const FilmInfo = ({ filmId }: any) => {
     const dispatch = useAppDispatch()
 
     const { filmInfo } = useAppSelector(state => state.films)
-    const { backdrop_path, budget, genres, homepage, title, overview, production_companies, release_date, revenue, runtime, vote_average, vote_count, poster_path, tagline }: any = filmInfo
+    const { backdrop_path, budget, genres, homepage, title, overview, production_companies, release_date, revenue, runtime, poster_path, tagline }: any = filmInfo
 
     useEffect(() => {
         filmsApi.getById(filmId)
