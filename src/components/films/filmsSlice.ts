@@ -7,6 +7,7 @@ const filmsAdapter = createEntityAdapter()
 interface States {
     mainFilms: Array<any>,
     genres: Array<any>,
+    filmInfo: Object,
     page: number,
     chooseGenres: boolean,
     filmLoadingStatus: string
@@ -15,6 +16,7 @@ interface States {
 const initialState: States = filmsAdapter.getInitialState({
     mainFilms: [],
     genres: [],
+    filmInfo: {},
     page: 1,
     chooseGenres: false,
     filmLoadingStatus: 'idle'
@@ -35,12 +37,13 @@ const filmsSlice = createSlice({
         mainFilmsChanges: (state, action) => { state.mainFilms = action.payload },
         genresChanges: (state, action) => { state.genres = action.payload },
         pageChanges: (state, action) => { state.page = action.payload },
-        chooseGenresChanges: (state, action) => { state.chooseGenres = action.payload }
+        chooseGenresChanges: (state, action) => { state.chooseGenres = action.payload },
+        filmInfoChanges: (state, action) => { state.filmInfo = action.payload }
     },
     extraReducers: (buider) => {
         buider
             .addCase(fetchFilms.pending, state => { state.filmLoadingStatus = 'loading' })
-            .addCase(fetchFilms.fulfilled, (state:any, action) => {
+            .addCase(fetchFilms.fulfilled, (state: any, action) => {
                 state.filmLoadingStatus = 'idle';
                 filmsAdapter.setAll(state, action.payload);
 
@@ -61,5 +64,6 @@ export const {
     mainFilmsChanges,
     genresChanges,
     pageChanges,
-    chooseGenresChanges
+    chooseGenresChanges,
+    filmInfoChanges
 } = actions

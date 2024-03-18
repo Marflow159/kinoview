@@ -3,6 +3,8 @@ import { chooseGenresChanges, mainFilmsChanges } from '../films/filmsSlice'
 import { filmsApi } from '../../services'
 
 import './header.scss'
+import { Link } from 'react-router-dom'
+
 
 
 const Header = () => {
@@ -10,15 +12,15 @@ const Header = () => {
 
     const dispatch = useAppDispatch()
 
-    const searchMovie = (e:any) => {
-        let {value} = e.target
+    const searchMovie = (e: any) => {
+        let { value } = e.target
         if (value.length === 0) {
             filmsApi.getByPage(1)
                 .then((data: any) => dispatch(mainFilmsChanges(data.results)))
         } else {
             filmsApi.searchMovie(value, 1)
                 .then((data: any) => dispatch(mainFilmsChanges(data.results)))
-        } 
+        }
     }
 
     const onChooseGenres = () => {
@@ -32,15 +34,18 @@ const Header = () => {
             </a>
             <div className='header__genres' onClick={onChooseGenres}>
                 Genres
-                <img src="./image/mainPage/up-arrow.png" className={chooseGenres === true ? 'rotate': ''} alt="up-arrow" />
+                <img src="./image/mainPage/up-arrow.png" className={chooseGenres === true ? 'rotate' : ''} alt="up-arrow" />
             </div>
-            <input 
-            onKeyDown={(e) => {
-                if(e.key === 'Enter'){
-                    searchMovie(e)
-                }
-            }} 
-            placeholder='Search your movie...' type="text" id='inputSearch'/>
+            <Link to={'/'}>
+                <input
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                            searchMovie(e)
+                        }
+                    }}
+                    placeholder='Search your movie...' type="text" id='inputSearch' />
+            </Link>
+
         </div>
     )
 }

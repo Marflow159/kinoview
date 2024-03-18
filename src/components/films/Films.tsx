@@ -23,7 +23,7 @@ const Films = () => {
 
     const filmsElement = mainFilms.map((item, i) => {
         const { id, ...props } = item
-        return <FilmsElement key={id} {...props} genres={genres} i={i} />
+        return <FilmsElement key={id} {...props} genres={genres} i={i} id={id}/>
     })
 
     const addGenreAndFilms = () => {
@@ -51,7 +51,7 @@ const Films = () => {
             element = <NotFound/>
         }
     }
-
+    
     return (
         <div className='films'>
             {element}

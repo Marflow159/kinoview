@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks'
 import { filmsApi } from '../../services'
 import { chooseGenresChanges, mainFilmsChanges } from '../films/filmsSlice'
@@ -9,9 +10,9 @@ const Genres = () => {
 
     let genresButtons = genres.map(({ id, name }) => {
         return (
-            <button key={id} onClick={() => onChooseGenres(id)}>
+            <Link to={'/'} key={id} onClick={() => onChooseGenres(id)}>
                 {name}
-            </button>
+            </Link>
         )
     })
 
